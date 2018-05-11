@@ -1,0 +1,71 @@
+<!--<ion-list>
+<ion-card *ngFor="let post of posts">
+
+    <ion-item>
+      
+      <h2>{{ post.title }}</h2>
+     
+    </ion-item>
+  
+    <img src="https://placekitten.com/760/300">
+  
+    <ion-card-content>
+        <p>{{ post.body }}</p>
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)='onLoadMoreClick(post.id);'>
+          Read More
+        </button>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card>
+</ion-list> -->
+
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>List of posts</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let post of posts">
+
+    <ion-card-content>
+      <ion-card-title>
+        {{ post.title }}
+      </ion-card-title>
+
+    </ion-card-content>
+
+    <img src="https://placekitten.com/760/300" />
+
+    <ion-card-content>
+      <p>
+        {{ post.body | slice:0:200}}
+        <!-- Body preview limited to 200 character -->
+      </p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)='onLoadMoreClick(post.id);'>
+          Read More
+        </button>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-card>
+
+  <!-- an infinte scroll component from ionic library-->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <!-- fire doInfinite function when the user reach end of screen -->
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

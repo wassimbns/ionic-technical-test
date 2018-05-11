@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img src="https://placekitten.com/760/300" />
+
+  <div class="blog-post">
+    <ion-card>
+      <ion-card-content>
+        {{ body }}
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>5 Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+    <ion-content padding>
+      <post-comments></post-comments>
+    </ion-content>
+  </div>
+
+</ion-content>

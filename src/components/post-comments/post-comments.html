@@ -1,0 +1,32 @@
+<!--
+<ion-content padding>
+  
+  
+
+  <ion-card *ngFor="let comment of comments">
+
+    <ion-card-header>
+      {{ comment.body }}
+    </ion-card-header>
+  
+    <ion-card-content>
+
+    </ion-card-content>
+  
+  </ion-card>
+
+</ion-content> -->
+
+
+<ion-list>
+  <ion-item *ngFor="let comment of comments; let i = index">
+    <ion-avatar item-start>
+
+      <img src="https://picsum.photos/200/300?image={{i}}">
+
+    </ion-avatar>
+    <h2>{{ comment.name }}</h2>
+    <h3>{{ comment.email }}</h3>
+    <p>{{ comment.body }}</p>
+  </ion-item>
+</ion-list>
