@@ -1,27 +1,32 @@
-import { Component } from '@angular/core';
-import { Http } from '@angular/http';
-import { NavController,NavParams } from 'ionic-angular';
-/**
- * Generated class for the PostCommentsComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+import { Component, EventEmitter, Output } from "@angular/core";
+import { Http } from "@angular/http";
+import { NavController, NavParams } from "ionic-angular";
+
+import { DataServiceProvider } from "../../providers/data-service/data-service";
 @Component({
-  selector: 'post-comments',
-  templateUrl: 'post-comments.html'
+  selector: "post-comments",
+  templateUrl: "post-comments.html"
 })
 export class PostCommentsComponent {
-i:number;
-id:number;
-comments:any;
+  i: number;
+  id: number;
+  comments: any;
 
-constructor(public navCtrl : NavController, public http : Http, public navParams: NavParams) {
-  this.id = navParams.get('id');
-  this.http.get(`https://jsonplaceholder.typicode.com/posts/${this.id}/comments`).map(res => res.json()).subscribe(data => {
-    this.comments = data;
-});
+  @Output() public updateCommentsLength = new EventEmitter();
+  constructor(
+    public navCtrl: NavController,
+    public dataServiceProvider: DataServiceProvider,
+    public navParams: NavParams
+  ) {
+    this.id = navParams.get("post").id;
+    this.dataServiceProvider.getComments(this.id).subscribe(data => {
+      this.comments = data;
+      if (data == null) this.fireUpdateCommentsLength(0);
+      else this.fireUpdateCommentsLength(data.length);
+    });
+  }
 
-}
-
+  fireUpdateCommentsLength(commentsLength) {
+    this.updateCommentsLength.next([commentsLength]);
+  }
 }

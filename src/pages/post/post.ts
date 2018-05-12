@@ -7,23 +7,23 @@ import { PostCommentsComponent } from "../../components/post-comments/post-comme
   templateUrl: "post.html"
 })
 export class PostPage {
-  id: any;
-  comments: any;
-  title: any;
-  body: any;
+  id: number;
+  commentsLength: number;
+  title: string;
+  body: string;
 
   constructor(
     public navCtrl: NavController,
     public http: Http,
     public navParams: NavParams
   ) {
-    this.id = navParams.get("id");
-    this.http
-      .get(`https://jsonplaceholder.typicode.com/posts/${this.id}`)
-      .map(res => res.json())
-      .subscribe(data => {
-        this.title = data.title;
-        this.body = data.body;
-      });
+    this.commentsLength = 0;
+    this.id = navParams.get("post").id;
+    this.title = navParams.get("post").title;
+    this.body = navParams.get("post").body;
+  }
+
+  handleUpdateCommentsLength(arg) {
+    this.commentsLength = arg[0];
   }
 }

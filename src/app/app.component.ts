@@ -22,8 +22,8 @@ export class MyApp {
     this.network.onDisconnect().subscribe(() => {
       let alert = this.alertCtrl.create({
         title: "No internet connection!",
-        subTitle: "please verify your internet connection and retry again...",
-        buttons: ["Dismiss"]
+        subTitle: "You are now using the app off ligne ",
+        buttons: ["got it !"]
       });
       alert.present();
     });

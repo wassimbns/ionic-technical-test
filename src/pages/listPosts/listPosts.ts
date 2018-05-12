@@ -1,10 +1,9 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { Http } from "@angular/http";
+import "rxjs/add/operator/map";
 
 import { PostPage } from "../post/post";
-
-import "rxjs/add/operator/map";
+import { DataServiceProvider } from "../../providers/data-service/data-service";
 
 @Component({
   selector: "page-listPosts",
@@ -16,19 +15,19 @@ export class ListPostsPage {
   posts: Array<any> = [];
   scrollCallback;
 
-  constructor(public navCtrl: NavController, public http: Http) {
-    this.http
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .map(res => res.json())
-      .subscribe(data => {
-        this.allPosts = data;
-        this.posts = this.posts.concat(this.allPosts.slice(0, 5));
-      });
+  constructor(
+    public navCtrl: NavController,
+    public dataServiceProvider: DataServiceProvider
+  ) {
+    this.dataServiceProvider.getPosts().subscribe(data => {
+      this.allPosts = data;
+      this.posts = this.posts.concat(this.allPosts.slice(0, 5));
+    });
   }
 
-  onLoadMoreClick(postId) {
+  onLoadMoreClick(post) {
     this.navCtrl.push(PostPage, {
-      id: postId
+      post: post
     });
   }
 

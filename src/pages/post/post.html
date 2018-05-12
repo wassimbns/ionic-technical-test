@@ -18,14 +18,14 @@
         <ion-col>
           <button ion-button icon-left clear small>
             <ion-icon name="text"></ion-icon>
-            <div>5 Comments</div>
+            <div>{{ commentsLength }} Comments</div>
           </button>
         </ion-col>
       </ion-row>
 
     </ion-card>
     <ion-content padding>
-      <post-comments></post-comments>
+      <post-comments (updateCommentsLength)="handleUpdateCommentsLength($event)"></post-comments>
     </ion-content>
   </div>
 
